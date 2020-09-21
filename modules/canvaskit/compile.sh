@@ -222,6 +222,10 @@ if [[ $@ == *no_paragraph* ]] || [[ $@ == *primitive_shaper* ]] || [[ $@ == *no_
   PARAGRAPH_BINDINGS=""
 fi
 
+PPENGINE_JS="--pre-js $BASE_DIR/ppengine.js"
+PPENGINE_BINDINGS="-DSK_INCLUDE_PPENGINE=1 \
+  $BASE_DIR/ppengine_bindings.cpp"
+
 DO_DECODE="true"
 if [[ $@ == *no_codecs* ]]; then
   echo "Omitting codecs"
@@ -343,7 +347,8 @@ fi
 # Emscripten prefers that the .a files go last in order, otherwise, it
 # may drop symbols that it incorrectly thinks aren't used. One day,
 # Emscripten will use LLD, which may relax this requirement.
-EMCC_DEBUG=1 ${EMCXX} \
+EMCC_DEBUG=2 ${EMCXX} \
+    -g1 \
     $RELEASE_CONF \
     -I. \
     -Ithird_party/icu \
@@ -363,6 +368,7 @@ EMCC_DEBUG=1 ${EMCXX} \
     --pre-js $BASE_DIR/helper.js \
     --pre-js $BASE_DIR/interface.js \
     $PARAGRAPH_JS \
+    $PPENGINE_JS \
     $SKOTTIE_JS \
     $PARTICLES_JS \
     $PATHOPS_JS \
@@ -377,6 +383,7 @@ EMCC_DEBUG=1 ${EMCXX} \
     $VIEWER_BINDINGS \
     $MANAGED_SKOTTIE_BINDINGS \
     $PARAGRAPH_BINDINGS \
+    $PPENGINE_BINDINGS \
     $SKOTTIE_LIB \
     $VIEWER_LIB \
     $PARTICLES_LIB \

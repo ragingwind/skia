@@ -214,15 +214,7 @@ sk_sp<SkSurface> MakeRenderTarget(sk_sp<GrContext> grContext, SimpleImageInfo si
 #endif
 
 
-//========================================================================================
-// Path things
-//========================================================================================
 
-// All these Apply* methods are simple wrappers to avoid returning an object.
-// The default WASM bindings produce code that will leak if a return value
-// isn't assigned to a JS variable and has delete() called on it.
-// These Apply methods, combined with the smarter binding code allow for chainable
-// commands that don't leak if the return value is ignored (i.e. when used intuitively).
 void ApplyAddPath(SkPath& orig, const SkPath& newPath,
                    SkScalar scaleX, SkScalar skewX,  SkScalar transX,
                    SkScalar skewY,  SkScalar scaleY, SkScalar transY,

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<title>CanvasKit (Skia via Web Assembly)</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+  canvas,
+  img {
+    border: 1px dashed #aaa;
+    width: 300px;
+    height: 300px;
+  }
+</style>
+<canvas id="line" width="300" height="300"></canvas>
+<script
+  type="text/javascript"
+  src="/node_modules/canvaskit/bin/canvaskit.js"
+></script>
+
+<script type="text/javascript" charset="utf-8">
+  var CanvasKit = null;
+  var cdn = 'https://storage.googleapis.com/skia-cdn/misc/';
+
+  const ckLoaded = CanvasKitInit({
+    locateFile: (file) => '/node_modules/canvaskit/bin/' + file,
+  });
+
+  const loadRoboto = fetch(cdn + 'Roboto-Regular.ttf').then((response) =>
+    response.arrayBuffer()
+  );
+  const loadNotoSerif = fetch(cdn + 'NotoSerif-Regular.ttf').then((response) =>
+    response.arrayBuffer()
+  );
+  const loadTestImage = fetch(cdn + 'test.png').then((response) =>
+    response.arrayBuffer()
+  );
+
+  // Examples which only require canvaskit
+  ckLoaded.then((CK) => {
+    CanvasKit = CK;
+    console.log('CanvasKit', CanvasKit);
+    CanvasKit.PPEngineDrawSVG(document.getElementById('line'));
+  });
+</script>

@@ -54,6 +54,7 @@ var CanvasKit = {
   MakeRenderTarget: function() {},
   MakeSkPicture: function() {},
   MakeSWCanvasSurface: function() {},
+  PPEngineDrawSVG: function() {},
   MakeManagedAnimation: function() {},
   MakeParticles: function() {},
   MakeSkVertices: function() {},
@@ -92,6 +93,7 @@ var CanvasKit = {
   _decodeImage: function() {},
   _drawShapedText: function() {},
   _getRasterDirectSurface: function() {},
+  drawPath: function() {},
   _getRasterN32PremulSurface: function() {},
 
   // The testing object is meant to expose internal functions
