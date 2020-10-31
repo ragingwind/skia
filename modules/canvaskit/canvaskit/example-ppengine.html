@@ -13,6 +13,7 @@
   }
 </style>
 <canvas id="line" width="300" height="300"></canvas>
+<canvas id="svg" width="300" height="300"></canvas>
 <script
   type="text/javascript"
   src="/node_modules/canvaskit/bin/canvaskit.js"
@@ -40,6 +41,7 @@
   ckLoaded.then((CK) => {
     CanvasKit = CK;
     console.log('CanvasKit', CanvasKit);
-    CanvasKit.PPEngineDrawSVG(document.getElementById('line'));
+    CanvasKit.PPEngineDrawPath(document.getElementById('line'));
+    CanvasKit.PPEngineDrawSVG(document.getElementById('svg'));
   });
 </script>

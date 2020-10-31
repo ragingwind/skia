@@ -15,7 +15,7 @@ if (skia_use_system_expat) {
   }
 } else {
   third_party("expat") {
-    public_defines = [ "XML_STATIC" ]
+    public_defines = [ "XML_STATIC", "SK_XML" ]
     public_include_dirs = [ "../externals/expat/expat/lib" ]
 
     defines = [
